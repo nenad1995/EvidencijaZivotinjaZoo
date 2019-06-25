@@ -30,6 +30,15 @@
         <button @click="moveToTop(index)">Move to top</button>
       </tr>
     </table>
+    <table>
+      <tr>
+        <th>Sector</th>
+      </tr>
+      <tr v-for="(sector,index) in sectors" :key="index"> 
+        <td> {{sector}} </td>  
+        <button @click="vidiZivotinju(sector)">Vidi listu zivotinja</button>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -38,11 +47,11 @@ export default {
   data() {
     return {
       animals: [
-        {specie:"Tiger", name:"Tiger", birthday:"20.03.2010", sector: 'opasne zivotinje'},
-        {specie:"Bear", name:"Meda", birthday:"23.08.2015", sector: 'debele zivotinje'},
-        {specie:"Lion", name:"Lord", birthday:"", sector: 'mackice'},
-        {specie:"Horse", name:"Marko", birthday:"15.04.2012", sector: 'hipodrom'},
-        {specie:"Cat", name:"Cica", birthday:"10.02.2018", sector: 'kucne macke'}
+        {specie:"Tiger", name:"Tiger", birthday:"20.03.2010", sector: 'spavalice'},
+        {specie:"Bear", name:"Meda", birthday:"23.08.2015", sector: 'opanse zivotinje'},
+        {specie:"Lion", name:"Lord", birthday:"", sector: 'opanse zivotinje'},
+        {specie:"Horse", name:"Marko", birthday:"15.04.2012", sector: 'domace'},
+        {specie:"Cat", name:"Cica", birthday:"10.02.2018", sector: 'spavalice'}
       ],
       animal: {
         name: '',
@@ -68,13 +77,18 @@ export default {
     moveToTop(index) {
       const animal = this.animals[index];
       this.animals.splice(index,1);
-      this.animals = [
-        animal,
-        ...this.animals
-      ]
+      this.animals = [animal,...this.animals]
     },
     addItem() {
       this.animals.push({...this.animal})
+    },
+    vidiZivotinju(sector) {
+      let animalsInSector = this.animals.filter(item => item.sector === sector)
+      let a = ''
+      for(let i = 0;i < animalsInSector.length; i++){
+        a += ` ${animalsInSector[i].name}`
+      }
+      alert(a);
     }
   }
 }
