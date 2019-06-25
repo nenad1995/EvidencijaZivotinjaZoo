@@ -8,7 +8,7 @@
     <tr v-for="(animal, index) in animals" :key="index">
       <td>{{ animal.specie }}</td>
       <td>{{ animal.name }}</td>
-      <td>{{ animal.birthday }}</td>
+      <td> {{animal.birthday || 'Nepoznat'}}</td>
     </tr>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
       animals: [
         {specie:"Tiger", name:"Tiger", birthday:"20.03.2010"},
         {specie:"Bear", name:"Meda", birthday:"23.08.2015"},
-        {specie:"Lion", name:"Lord", birthday:"30.05.2013"},
+        {specie:"Lion", name:"Lord", birthday:""},
         {specie:"Horse", name:"Marko", birthday:"15.04.2012"},
         {specie:"Cat", name:"Cica", birthday:"10.02.2018"}
       ]
