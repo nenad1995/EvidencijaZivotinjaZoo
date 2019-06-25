@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <table>
     <tr>
       <th>vrsta</th>
       <th>ime</th>
@@ -9,8 +9,9 @@
       <td>{{ animal.specie }}</td>
       <td>{{ animal.name }}</td>
       <td> {{animal.birthday || 'Nepoznat'}}</td>
+      <button @click="removeItem(index)">Remove</button>
     </tr>
-  </div>
+  </table>
 </template>
 
 <script>
@@ -24,6 +25,12 @@ export default {
         {specie:"Horse", name:"Marko", birthday:"15.04.2012"},
         {specie:"Cat", name:"Cica", birthday:"10.02.2018"}
       ]
+    }
+  },
+
+  methods: {
+    removeItem(index) {
+      this.animals.splice(index, 1)
     }
   }
 }
