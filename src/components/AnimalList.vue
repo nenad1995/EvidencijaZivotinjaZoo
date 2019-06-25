@@ -8,6 +8,10 @@
         <input type="text" v-model="animal.name" />
         <label>Rodjendan:</label>
         <input type="text" v-model="animal.birthday">
+        <label>Sektor:</label>
+        <select v-model="animal.sector">
+          <option v-for="(sector) in sectors" :key="sector" :value="sector">{{sector}}</option>
+        </select>
       </div>
       <button type="submit">add</button>
     </form>
@@ -21,6 +25,7 @@
         <td>{{ animal.specie }}</td>
         <td>{{ animal.name }}</td>
         <td> {{animal.birthday || 'Nepoznat'}}</td>
+        <td> {{animal.sector}}</td>
         <button @click="removeItem(index)">Remove</button>
         <button @click="moveToTop(index)">Move to top</button>
       </tr>
@@ -33,17 +38,26 @@ export default {
   data() {
     return {
       animals: [
-        {specie:"Tiger", name:"Tiger", birthday:"20.03.2010"},
-        {specie:"Bear", name:"Meda", birthday:"23.08.2015"},
-        {specie:"Lion", name:"Lord", birthday:""},
-        {specie:"Horse", name:"Marko", birthday:"15.04.2012"},
-        {specie:"Cat", name:"Cica", birthday:"10.02.2018"}
+        {specie:"Tiger", name:"Tiger", birthday:"20.03.2010", sector: 'opasne zivotinje'},
+        {specie:"Bear", name:"Meda", birthday:"23.08.2015", sector: 'debele zivotinje'},
+        {specie:"Lion", name:"Lord", birthday:"", sector: 'mackice'},
+        {specie:"Horse", name:"Marko", birthday:"15.04.2012", sector: 'hipodrom'},
+        {specie:"Cat", name:"Cica", birthday:"10.02.2018", sector: 'kucne macke'}
       ],
       animal: {
         name: '',
         birthday: '',
-        specie: ''
-      }
+        specie: '',
+        sector: ''
+      },
+
+      sectors: [
+        "opanse zivotinje",
+        "spavalice",
+        "ptice",
+        "domace",
+        "vodene"
+      ]
     }
   },
 
