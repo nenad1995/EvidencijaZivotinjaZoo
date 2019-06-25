@@ -1,18 +1,31 @@
 <template>
-  <table>
-    <tr>
-      <th>vrsta</th>
-      <th>ime</th>
-      <th>datum rodjenja</th>
-    </tr>
-    <tr v-for="(animal, index) in animals" :key="index">
-      <td>{{ animal.specie }}</td>
-      <td>{{ animal.name }}</td>
-      <td> {{animal.birthday || 'Nepoznat'}}</td>
-      <button @click="removeItem(index)">Remove</button>
-      <button @click="moveToTop(index)">Move to top</button>
-    </tr>
-  </table>
+  <div>
+    <form @submit.prevent="addItem">
+      <div>
+        <label>Vrsta:</label>
+        <input type="text" v-model="animal.specie"  />
+        <label>Ime:</label>
+        <input type="text" v-model="animal.name" />
+        <label>Rodjendan:</label>
+        <input type="text" v-model="animal.birthday">
+      </div>
+      <button type="submit">add</button>
+    </form>
+    <table>
+      <tr>
+        <th>vrsta</th>
+        <th>ime</th>
+        <th>datum rodjenja</th>
+      </tr>
+      <tr v-for="(animal, index) in animals" :key="index">
+        <td>{{ animal.specie }}</td>
+        <td>{{ animal.name }}</td>
+        <td> {{animal.birthday || 'Nepoznat'}}</td>
+        <button @click="removeItem(index)">Remove</button>
+        <button @click="moveToTop(index)">Move to top</button>
+      </tr>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -25,7 +38,12 @@ export default {
         {specie:"Lion", name:"Lord", birthday:""},
         {specie:"Horse", name:"Marko", birthday:"15.04.2012"},
         {specie:"Cat", name:"Cica", birthday:"10.02.2018"}
-      ]
+      ],
+      animal: {
+        name: '',
+        birthday: '',
+        specie: ''
+      }
     }
   },
 
@@ -40,6 +58,9 @@ export default {
         animal,
         ...this.animals
       ]
+    },
+    addItem() {
+      this.animals.push({...this.animal})
     }
   }
 }
